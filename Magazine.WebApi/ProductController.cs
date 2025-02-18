@@ -11,7 +11,7 @@ namespace Magazine.WebApi
     [Route("[controller]")]
     public class ProductController : Controller
     {
-        private readonly IProductService _productService = new ProductService();
+        private readonly IProductService _productService = new ProductService(new ConfigurationBuilder().Build());
 
         /// <summary>
         /// Get product from DB

@@ -1,15 +1,20 @@
 ﻿using Magazine.Core.Models;
 using Magazine.Core.Services;
 using Microsoft.Data.Sqlite;
+using Newtonsoft.Json;
 
 namespace Magazine.WebApi
 {
     public class ProductService : IProductService
     {
         private readonly string _connectionString = $"Data Source=some.db;";
+        private IConfiguration _configuration;
+        private Dictionary<Guid, Product> map;
 
-        public ProductService()
+        public ProductService(IConfiguration configuration)
         {
+            _configuration = configuration;
+
             var connection = new SqliteConnection(_connectionString);
             connection.Open();
 
@@ -24,6 +29,27 @@ namespace Magazine.WebApi
             };
 
             command.ExecuteNonQuery();
+
+            InitFromFile();
+        }
+
+        private void InitFromFile() {
+            string filePath = _configuration.GetValue<string>("DataBaseFilePath");
+
+            if (File.Exists(filePath))
+            {
+                string json = File.ReadAllText(filePath);
+                map = JsonConvert.DeserializeObject<Dictionary<Guid, Product>>(json);
+
+            } else
+                map = new Dictionary<Guid, Product>();
+        }
+
+        private void WriteToFile() {
+            string filePath = _configuration.GetValue<string>("DataBaseFilePath");
+            
+            string json = JsonConvert.SerializeObject(map);
+            File.WriteAllText(filePath, json);
         }
 
         /// <inheritdoc/>
