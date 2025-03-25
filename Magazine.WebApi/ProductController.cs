@@ -8,10 +8,17 @@ namespace Magazine.WebApi
     /// Provides endpoints for interacting with products
     /// </summary>
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class ProductController : Controller
     {
-        private readonly IProductService _productService = new ProductService(new ConfigurationBuilder().Build());
+        private IProductService _productService;
+
+        public ProductController(IProductService productService)
+        {
+            _productService = productService;
+        }
+        
+        //private IProductService _productService = new ProductService(new ConfigurationBuilder().Build());
 
         /// <summary>
         /// Get product from DB

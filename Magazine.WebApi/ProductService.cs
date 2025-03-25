@@ -35,6 +35,8 @@ namespace Magazine.WebApi
 
         private void InitFromFile() {
             string filePath = _configuration.GetValue<string>("DataBaseFilePath");
+            if (filePath == null)
+                filePath = "C:\\Users\\user\\Documents\\repos\\webshop\\Magazine.WebApi\\database.txt";
 
             if (File.Exists(filePath))
             {
@@ -47,7 +49,9 @@ namespace Magazine.WebApi
 
         private void WriteToFile() {
             string filePath = _configuration.GetValue<string>("DataBaseFilePath");
-            
+            if (filePath == null)
+                filePath = "C:\\Users\\user\\Documents\\repos\\webshop\\Magazine.WebApi\\database.txt";
+
             string json = JsonConvert.SerializeObject(map);
             File.WriteAllText(filePath, json);
         }
@@ -71,6 +75,10 @@ namespace Magazine.WebApi
             command.Parameters.AddWithValue("@Image", product.Image);
 
             command.ExecuteNonQuery();
+
+            map.Add(product.Id, product);
+            WriteToFile();
+
             return product;
         }
 
@@ -93,6 +101,9 @@ namespace Magazine.WebApi
 
             int rowsAffected = command.ExecuteNonQuery();
             if (rowsAffected == 0) return null;
+
+            map.Remove(product.Id);
+            WriteToFile();
 
             return product;
         }
@@ -119,6 +130,10 @@ namespace Magazine.WebApi
             command.Parameters.AddWithValue("@Image", updatedProduct.Image);
 
             command.ExecuteNonQuery();
+
+            map[updatedProduct.Id] = updatedProduct;
+            WriteToFile();
+
             return updatedProduct;
         }
 

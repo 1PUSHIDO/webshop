@@ -7,6 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magazine.Core", "Magazine.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magazine.WebApi", "Magazine.WebApi\Magazine.WebApi.csproj", "{7321A440-FBD8-401B-9057-E93C27F2D047}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magazine.Test", "Magazine.Test\Magazine.Test.csproj", "{10A733D1-7F22-4F31-944F-65AB5AC582D2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{359E8FFD-76B9-48BD-89B6-617A8044969F} = {359E8FFD-76B9-48BD-89B6-617A8044969F}
+		{7321A440-FBD8-401B-9057-E93C27F2D047} = {7321A440-FBD8-401B-9057-E93C27F2D047}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,8 +47,23 @@ Global
 		{7321A440-FBD8-401B-9057-E93C27F2D047}.Release|x64.Build.0 = Release|Any CPU
 		{7321A440-FBD8-401B-9057-E93C27F2D047}.Release|x86.ActiveCfg = Release|Any CPU
 		{7321A440-FBD8-401B-9057-E93C27F2D047}.Release|x86.Build.0 = Release|Any CPU
+		{10A733D1-7F22-4F31-944F-65AB5AC582D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10A733D1-7F22-4F31-944F-65AB5AC582D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10A733D1-7F22-4F31-944F-65AB5AC582D2}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{10A733D1-7F22-4F31-944F-65AB5AC582D2}.Debug|x64.Build.0 = Debug|Any CPU
+		{10A733D1-7F22-4F31-944F-65AB5AC582D2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{10A733D1-7F22-4F31-944F-65AB5AC582D2}.Debug|x86.Build.0 = Debug|Any CPU
+		{10A733D1-7F22-4F31-944F-65AB5AC582D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10A733D1-7F22-4F31-944F-65AB5AC582D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10A733D1-7F22-4F31-944F-65AB5AC582D2}.Release|x64.ActiveCfg = Release|Any CPU
+		{10A733D1-7F22-4F31-944F-65AB5AC582D2}.Release|x64.Build.0 = Release|Any CPU
+		{10A733D1-7F22-4F31-944F-65AB5AC582D2}.Release|x86.ActiveCfg = Release|Any CPU
+		{10A733D1-7F22-4F31-944F-65AB5AC582D2}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5FFC408F-122B-42D6-A4E4-7AF4D97AF49A}
 	EndGlobalSection
 EndGlobal
