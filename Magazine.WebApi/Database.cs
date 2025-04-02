@@ -5,11 +5,16 @@ namespace Magazine.WebApi
 {
     public class Database
     {
-        private readonly string _connectionString = $"Data Source=some.db;";
+        private readonly string connectionString;
+
+        public Database()
+        {
+            connectionString = $"Data Source=some.db;";
+        }
 
         public void Create()
         {
-            var connection = new SqliteConnection(_connectionString);
+            var connection = new SqliteConnection(connectionString);
             connection.Open();
 
             SqliteCommand command = new()
@@ -27,7 +32,7 @@ namespace Magazine.WebApi
 
         public Product Select(Guid guid)
         {
-            var connection = new SqliteConnection(_connectionString);
+            var connection = new SqliteConnection(connectionString);
             connection.Open();
 
             SqliteCommand command = new()
@@ -56,7 +61,7 @@ namespace Magazine.WebApi
 
         public Product Insert(Product product)
         {
-            var connection = new SqliteConnection(_connectionString);
+            var connection = new SqliteConnection(connectionString);
             connection.Open();
 
             SqliteCommand command = new()
@@ -78,7 +83,7 @@ namespace Magazine.WebApi
 
         public Product Update(Product product)
         {
-            var connection = new SqliteConnection(_connectionString);
+            var connection = new SqliteConnection(connectionString);
             connection.Open();
 
             SqliteCommand command = new()
@@ -103,7 +108,7 @@ namespace Magazine.WebApi
 
         public Product Delete(Guid guid)
         {
-            var connection = new SqliteConnection(_connectionString);
+            var connection = new SqliteConnection(connectionString);
             connection.Open();
 
             Product product = Select(guid);

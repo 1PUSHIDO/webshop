@@ -49,6 +49,7 @@ namespace Magazine.Test
     class TestsProductControllerStub
     {
         private IProductService productService;
+        TestProductController controller = new();
         private IConfiguration configuration;
         private Guid guid;
         [SetUp]
@@ -62,8 +63,6 @@ namespace Magazine.Test
         [TestCase("TestProductDefinition", "TestProductName", 100.0, "TestProductImage"), Order(0)]
         public void PostTest(string definition, string name, double price, string image)
         {
-            TestProductController controller = new();
-
             guid = Guid.NewGuid();
 
             Product product = new()
@@ -87,7 +86,7 @@ namespace Magazine.Test
         [Test, Order(1)]
         public void GetTest()
         {
-            TestProductController controller = new();
+            //TestProductController controller = new();
 
             var result = (IStatusCodeActionResult)controller.Get(guid);
 
@@ -102,7 +101,7 @@ namespace Magazine.Test
         [TestCase("NewTestProductDefinition", "NewTestProductName", 200.0, "NewTestProductImage"), Order(2)]
         public void PutTest(string definition, string name, double price, string image)
         {
-            TestProductController controller = new();
+            //TestProductController controller = new();
 
             Product product = new()
             {
@@ -124,7 +123,7 @@ namespace Magazine.Test
         [Test, Order(3)]
         public void DeleteTest()
         {
-            TestProductController controller = new();
+            //TestProductController controller = new();
 
             var result = (IStatusCodeActionResult)controller.Delete(guid);
 
