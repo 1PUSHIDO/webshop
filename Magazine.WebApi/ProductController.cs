@@ -58,6 +58,9 @@ namespace Magazine.WebApi
         {
             var editedProduct = _productService.Edit(updatedProduct);
 
+            if (editedProduct is null)
+                return NotFound();
+
             return Ok(editedProduct);
         }
 
