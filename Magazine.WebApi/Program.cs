@@ -13,7 +13,8 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 builder.Services.AddSingleton<Database>();
-builder.Services.AddSingleton<IProductService, ProductService> ();
+builder.Services.AddSingleton<IProductService, ProductService>();
+builder.Services.AddSingleton<IProductService, DataBaseProductService>();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
