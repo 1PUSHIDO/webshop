@@ -1,5 +1,9 @@
-﻿namespace Magazine.Core.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
+
+namespace Magazine.Core.Models
 {
+    [Index("Id", IsUnique = true)]
     /// <summary>
     /// Information about product
     /// </summary>
