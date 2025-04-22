@@ -13,14 +13,12 @@ namespace Magazine.Test
 {
     class TestsProductControllerMock
     {
-        private IProductService productService;
         private IConfiguration configuration;
         private Guid guid;
         [SetUp]
         public void Setup()
         {
             configuration = new ConfigurationBuilder().Build();
-            productService = new ProductService(configuration);
             Console.WriteLine($"Тест контроллера запущен: {DateTime.Now:G}");
         }
 

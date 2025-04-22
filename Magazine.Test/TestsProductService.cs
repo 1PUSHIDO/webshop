@@ -14,7 +14,7 @@ namespace Magazine.Test
         [SetUp]
         public void Setup()
         {
-            productService = new ProductService(new ConfigurationBuilder().Build());
+            productService = new ProductService(new ConfigurationBuilder().Build(), new Database());
             Console.WriteLine($"Тест класса запущен: {DateTime.Now:G} | GUID - {guid}");
         }
 

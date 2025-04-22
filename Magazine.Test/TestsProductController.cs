@@ -19,7 +19,7 @@ namespace Magazine.Test
         public void Setup()
         {
             configuration = new ConfigurationBuilder().Build();
-            productService = new ProductService(configuration);
+            productService = new ProductService(configuration, new Database());
             Console.WriteLine($"Тест контроллера запущен: {DateTime.Now:G}");
         }
 

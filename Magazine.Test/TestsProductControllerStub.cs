@@ -48,7 +48,6 @@ namespace Magazine.Test
 {
     class TestsProductControllerStub
     {
-        private IProductService productService;
         TestProductController controller = new();
         private IConfiguration configuration;
         private Guid guid;
@@ -56,7 +55,6 @@ namespace Magazine.Test
         public void Setup()
         {
             configuration = new ConfigurationBuilder().Build();
-            productService = new ProductService(configuration);
             Console.WriteLine($"Тест контроллера запущен: {DateTime.Now:G}");
         }
 

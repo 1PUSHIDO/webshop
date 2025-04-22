@@ -7,15 +7,23 @@ namespace Magazine.WebApi
 {
     public class ProductService : IProductService
     {
-        private readonly string _connectionString = $"Data Source=some.db;";
+        private readonly string _connectionString;
         private IConfiguration _configuration;
         private Dictionary<Guid, Product> map;
+        private Database database;
 
-        public ProductService(IConfiguration configuration)
+        public ProductService(IConfiguration configuration, Database database)
         {
             _configuration = configuration;
+            this.database = database;
 
-            var connection = new SqliteConnection(_connectionString);
+            _connectionString = configuration.GetValue<string>("DataBaseFilePath");
+            if (_connectionString is null)
+                _connectionString = $"Data Source=some.db;";
+
+            database.Create(_connectionString);
+
+            /*var connection = new SqliteConnection(_connectionString);
             connection.Open();
 
             SqliteCommand command = new()
@@ -28,9 +36,9 @@ namespace Magazine.WebApi
                                                                      Image TEXT);"
             };
 
-            command.ExecuteNonQuery();
+            command.ExecuteNonQuery();*/
 
-            InitFromFile();
+            //InitFromFile();
         }
 
         private void InitFromFile() {
@@ -59,7 +67,7 @@ namespace Magazine.WebApi
         /// <inheritdoc/>
         public Product Add(Product product)
         {
-            var connection = new SqliteConnection(_connectionString);
+            /*var connection = new SqliteConnection(_connectionString);
             connection.Open();
 
             SqliteCommand command = new()
@@ -74,18 +82,18 @@ namespace Magazine.WebApi
             command.Parameters.AddWithValue("@Price", product.Price);
             command.Parameters.AddWithValue("@Image", product.Image);
 
-            command.ExecuteNonQuery();
+            command.ExecuteNonQuery();*/
 
-            map.Add(product.Id, product);
-            WriteToFile();
-
-            return product;
+            //map.Add(product.Id, product);
+            //WriteToFile();
+            
+            return database.Insert(product);
         }
 
         /// <inheritdoc/>
         public Product Remove(Guid id)
         {
-            var connection = new SqliteConnection(_connectionString);
+            /*var connection = new SqliteConnection(_connectionString);
             connection.Open();
 
             Product product = Search(id);
@@ -100,18 +108,18 @@ namespace Magazine.WebApi
             command.Parameters.AddWithValue("@Id", product.Id);
 
             int rowsAffected = command.ExecuteNonQuery();
-            if (rowsAffected == 0) return null;
+            if (rowsAffected == 0) return null;*/
 
-            map.Remove(product.Id);
-            WriteToFile();
+            //map.Remove(product.Id);
+            //WriteToFile();
 
-            return product;
+            return database.Delete(id);
         }
 
         /// <inheritdoc/>
         public Product Edit(Product updatedProduct)
         {
-            var connection = new SqliteConnection(_connectionString);
+            /*var connection = new SqliteConnection(_connectionString);
             connection.Open();
 
             SqliteCommand command = new()
@@ -129,18 +137,18 @@ namespace Magazine.WebApi
             command.Parameters.AddWithValue("@Price", updatedProduct.Price);
             command.Parameters.AddWithValue("@Image", updatedProduct.Image);
 
-            command.ExecuteNonQuery();
+            command.ExecuteNonQuery();*/
 
-            map[updatedProduct.Id] = updatedProduct;
-            WriteToFile();
+            //map[updatedProduct.Id] = updatedProduct;
+            //WriteToFile();
 
-            return updatedProduct;
+            return database.Update(updatedProduct);
         }
 
         /// <inheritdoc/>
         public Product Search(Guid id)
         {
-            var connection = new SqliteConnection(_connectionString);
+            /*var connection = new SqliteConnection(_connectionString);
             connection.Open();
 
             SqliteCommand command = new()
@@ -163,8 +171,9 @@ namespace Magazine.WebApi
                 Image = dataReader.GetString(4)
             };
 
-            connection.Close();
-            return product;
+            connection.Close();*/
+
+            return database.Select(id);
         }
     }
 }

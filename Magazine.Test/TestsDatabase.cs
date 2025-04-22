@@ -7,6 +7,7 @@ using Magazine.Core.Models;
 using Magazine.Core.Services;
 using Magazine.WebApi;
 using Microsoft.Extensions.Configuration;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Magazine.Test
 {
@@ -18,7 +19,7 @@ namespace Magazine.Test
         public void Setup()
         {
             database = new Database();
-            database.Create();
+            database.Create("Data Source=some.db;");
             Console.WriteLine($"Тест класса запущен: {DateTime.Now:G} | GUID - {guid}");
         }
 
